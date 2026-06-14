@@ -13,7 +13,7 @@ const zh: Record<string, string> = {
   /* Hero */
   "hero.greeting": "你好，我是",
   "hero.name": "小鱼干",
-  "hero.desc": "记录项目开发过程，分享技术心得体会。关注通信硬件、AI、嵌入式软硬件等领域。",
+  "hero.desc": "某硬件公司在职牛马，记录个人项目开发实践过程，分享技术心得体会。关注通信硬件、AI、嵌入式软硬件等领域。",
 
   /* Home sections */
   "home.recent_posts": "最新文章",
@@ -37,7 +37,7 @@ const zh: Record<string, string> = {
 
   /* About */
   "about.title": "关于我",
-  "about.bio": "一个热爱技术的开发者，喜欢探索和记录。",
+  "about.bio": "一个热爱技术、关注生活的开发者，喜欢探索和记录。",
 
   /* Timeline */
   "timeline.title": "时间线",

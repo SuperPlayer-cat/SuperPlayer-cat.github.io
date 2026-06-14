@@ -3,7 +3,7 @@
     <div class="hero-avatar">
       <div class="avatar-wrapper">
         <img
-          src="/images/me.png"
+          src="/images/touxiang.png"
           alt="Avatar"
           class="avatar-img"
           @error="onAvatarError"
