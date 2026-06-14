@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import TimelineSection from "../components/TimelineSection.vue"
+import SkillBadge from "../components/SkillBadge.vue"
+
+const timelineItems = [
+  {
+    date: "2026",
+    title: "搭建个人博客",
+    desc: "使用 Astro + Vue 3 + Tailwind CSS 构建个人技术博客网站，部署于 GitHub Pages。",
+  },
+  {
+    date: "2025",
+    title: "持续学习中",
+    desc: "学习嵌入式开发、机器人技术和前端开发，积累项目经验。",
+  },
+]
+
+const skillGroups = [
+  {
+    category: "前端开发",
+    items: ["Vue 3", "TypeScript", "React", "Astro", "Tailwind CSS", "Vite"],
+  },
+  {
+    category: "嵌入式",
+    items: ["STM32", "Keil MDK", "FreeRTOS", "C/C++", "Rust"],
+  },
+  {
+    category: "工具",
+    items: ["Git", "Linux", "Docker", "VS Code", "Fusion 360"],
+  },
+]
+---
+
+<BaseLayout title="关于" active="about">
+  <section class="section-padding">
+    <div class="container-main">
+      <h2 class="section-title">关于我</h2>
+      <p class="about-bio">
+        一个热爱技术的开发者，喜欢探索和记录。在这里分享项目开发过程和技术心得体会。关注嵌入式系统、机器人、前端开发等领域。
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding" style="padding-top: 0">
+    <div class="container-main">
+      <h2 class="section-title">时间线</h2>
+      <TimelineSection client:load items={timelineItems} />
+    </div>
+  </section>
+
+  <section class="section-padding" style="padding-top: 0">
+    <div class="container-main">
+      <h2 class="section-title">技术栈</h2>
+      <SkillBadge client:load groups={skillGroups} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-bio {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import BlogCard from "../../components/BlogCard.vue"
+import ScrollReveal from "../../components/ScrollReveal.vue"
+import { getCollection } from "astro:content"
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts")
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags || []))]
+  return tags.map((tag) => ({ params: { tag }, props: { tag } }))
+}
+
+const { tag } = Astro.props
+const posts = await getCollection("posts")
+const filteredPosts = posts
+  .filter((p) => (p.data.tags || []).includes(tag))
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
+---
+
+<BaseLayout title={`标签: ${tag}`} active="blog">
+  <section class="section-padding">
+    <div class="container-main">
+      <h2 class="section-title">标签: {tag}</h2>
+      <div class="posts-grid">
+        {filteredPosts.map((post, i) => (
+          <div style={`--reveal-delay: ${i * 80}ms`}>
+            <ScrollReveal client:load>
+              <BlogCard
+                client:load
+                title={post.data.title}
+                description={post.data.description}
+                date={new Date(post.data.publishedAt).toLocaleDateString("zh-CN")}
+                tags={post.data.tags}
+                href={`/blog/${post.id.replace(/\.md$/, "")}`}
+              />
+            </ScrollReveal>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+    gap: 24px;
+  }
+</style>

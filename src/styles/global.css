@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   1. Design Token & Themes
+   ========================================= */
+:root {
+  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --radius-md: 8px;
+  --radius-full: 999px;
+  --container-width: 1024px;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Light Mode - VS Code inspired */
+  --bg-body: #f3f3f3;
+  --bg-editor: #ffffff;
+  --bg-card: #ffffff;
+  --bg-panel: #f8f8f8;
+  --bg-sidebar: #f3f3f3;
+  --bg-toolbar: #f3f3f3;
+  --bg-glass: rgba(243, 243, 243, 0.94);
+  --bg-hover: #e8e8e8;
+  --bg-active: #e6f3ff;
+  --bg-terminal: #ffffff;
+
+  --text-main: #1f1f1f;
+  --text-muted: #616161;
+  --text-subtle: #8a8a8a;
+
+  --primary: #0078d4;
+  --primary-hover: #005a9e;
+  --primary-glow: rgba(0, 120, 212, 0.18);
+  --selection: #add6ff;
+  --terminal-user: #0078d4;
+  --terminal-path: #795e26;
+
+  --border-light: #d0d0d0;
+  --border-strong: #b8b8b8;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 8px 18px rgba(0, 0, 0, 0.09);
+  --shadow-hover: 0 14px 30px rgba(0, 0, 0, 0.12);
+
+  --gradient-title: linear-gradient(135deg, #1f1f1f 0%, #0078d4 100%);
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --bg-body: #1e1e1e;
+  --bg-editor: #1e1e1e;
+  --bg-card: #252526;
+  --bg-panel: #181818;
+  --bg-sidebar: #181818;
+  --bg-toolbar: #2d2d30;
+  --bg-glass: rgba(37, 37, 38, 0.9);
+  --bg-hover: #2d2d30;
+  --bg-active: #04395e;
+  --bg-terminal: #1e1e1e;
+
+  --text-main: #cccccc;
+  --text-muted: #9d9d9d;
+  --text-subtle: #6f6f6f;
+
+  --primary: #3794ff;
+  --primary-hover: #4fc1ff;
+  --primary-glow: rgba(55, 148, 255, 0.24);
+  --selection: #264f78;
+  --terminal-user: #4ec9b0;
+  --terminal-path: #dcdcaa;
+
+  --border-light: #3c3c3c;
+  --border-strong: #5a5a5a;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 10px 24px rgba(0, 0, 0, 0.28);
+  --shadow-hover: 0 16px 32px rgba(0, 0, 0, 0.36);
+
+  --gradient-title: linear-gradient(135deg, #cccccc 0%, #3794ff 100%);
+}
+
+/* =========================================
+   2. Global Reset & Base
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  max-width: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.6;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+::selection {
+  background: var(--selection);
+  color: var(--text-main);
+}
+
+:focus-visible {
+  outline: 1px solid var(--primary);
+  outline-offset: 2px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-sidebar);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-subtle);
+}
+
+/* =========================================
+   3. Utility Classes
+   ========================================= */
+.container-main {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-padding {
+  padding: 64px 0;
+}
+
+section[id] {
+  scroll-margin-top: 88px;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 32px;
+  color: var(--text-main);
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 4px;
+  background: var(--primary);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: var(--gradient-title);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =========================================
+   4. Animation Utilities
+   ========================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(2px);
+  transition: opacity 0.48s var(--ease-standard),
+    transform 0.48s var(--ease-standard),
+    filter 0.48s var(--ease-standard);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
+/* =========================================
+   5. Code Block (Mac Style)  
+   ========================================= */
+.pre-mac {
+  background: #1e1e1e;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+.pre-mac-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #2d2d30;
+  border-bottom: 1px solid #3c3c3c;
+}
+.pre-mac-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.pre-mac-dot--red {
+  background: #ff5f56;
+}
+.pre-mac-dot--yellow {
+  background: #ffbd2e;
+}
+.pre-mac-dot--green {
+  background: #27c93f;
+}
+.pre-mac-body {
+  padding: 16px 20px;
+  overflow-x: auto;
+}
+
+/* =========================================
+   6. Mobile Responsive
+   ========================================= */
+@media (max-width: 768px) {
+  .container-main {
+    padding: 0 16px;
+  }
+  .section-padding {
+    padding: 48px 0;
+  }
+  section[id] {
+    scroll-margin-top: 132px;
+  }
+  .section-title {
+    font-size: 1.6rem;
+  }
+}

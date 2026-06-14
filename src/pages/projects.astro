@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import ProjectCard from "../components/ProjectCard.vue"
+
+const projects = [
+  {
+    title: "个人博客",
+    description: "使用 Astro + Vue 3 + Tailwind CSS 构建的个人技术博客，支持暗色模式、国际化、标签系统。",
+    tags: ["Astro", "Vue 3", "Tailwind CSS", "GitHub Pages"],
+    links: [
+      { href: "https://github.com/xiaoyugan/xiaoyugan.github.io", label: "源码" },
+    ],
+  },
+]
+---
+
+<BaseLayout title="项目" active="projects">
+  <section class="section-padding">
+    <div class="container-main">
+      <h2 class="section-title">我的项目</h2>
+      {
+        projects.length === 0 ? (
+          <p class="empty-text">暂无项目</p>
+        ) : (
+          <div class="projects-list">
+            {projects.map((project) => (
+              <ProjectCard
+                client:load
+                title={project.title}
+                description={project.description}
+                tags={project.tags}
+                links={project.links}
+                img={project.img}
+              />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .empty-text {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    padding: 32px 0;
+  }
+</style>
