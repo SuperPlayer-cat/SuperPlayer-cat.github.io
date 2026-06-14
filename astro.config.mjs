@@ -3,7 +3,7 @@ import vue from "@astrojs/vue"
 import tailwind from "@astrojs/tailwind"
 
 export default defineConfig({
-  site: "https://xiaoyugan.github.io",
+  site: "https://superplayer-cat.github.io",
   base: "/",
   integrations: [
     vue({ appEntrypoint: "/src/pages/_app" }),
